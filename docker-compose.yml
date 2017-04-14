@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+    sshd_centos7:
+        build: 
+            context: ./centos7
+        image: vietdien2005/ssh_centos7:latest
+        ports:
+            - "222:22"
+        networks:
+            network_custom:
+                ipv4_address: 172.38.0.10
+
+
+networks:
+    network_custom:
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv4: "true"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.38.0.0/16
+                  gateway: 172.38.0.1
